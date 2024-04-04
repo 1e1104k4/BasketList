@@ -17,6 +17,7 @@ struct ContentView: View {
     )
     
     @State private var locations = [Location]()
+    @State private var selectedPlace: Location?
     
     var body: some View {
         MapReader { proxy in
@@ -28,6 +29,9 @@ struct ContentView: View {
                             .foregroundStyle(.yellow)
                             .frame(width: 40, height: 40)
                             .clipShape(.circle)
+                            .onLongPressGesture {
+                                selectedPlace = location
+                            }
                     }
                 }
             }
@@ -36,6 +40,9 @@ struct ContentView: View {
                     let newLocation = Location(id: UUID(), name: "New Location", description: "", latitude: coordinate.latitude, longitude: coordinate.longitude)
                     locations.append(newLocation)
                 }
+            }
+            .sheet(item: $selectedPlace) { place in // aut0 unwrap opt when value set
+                Text(place.name)
             }
         }
     }
