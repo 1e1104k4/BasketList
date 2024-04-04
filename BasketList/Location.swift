@@ -18,4 +18,9 @@ struct Location: Codable, Equatable, Identifiable {
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
+    
+    #if DEBUG
+    static let example = Location(id: UUID(), name: "Maui", description: "I was here", latitude: 20.85593, longitude: -156.60155)
+    #endif
+    
 }
