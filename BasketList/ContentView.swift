@@ -22,7 +22,13 @@ struct ContentView: View {
         MapReader { proxy in
             Map(initialPosition: startPosition) {
                 ForEach(locations) { location in
-                    Marker(location.name, coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    Annotation(location.name, coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)) {
+                        Image(systemName: "star.square")
+                            .resizable()
+                            .foregroundStyle(.yellow)
+                            .frame(width: 40, height: 40)
+                            .clipShape(.circle)
+                    }
                 }
             }
             .onTapGesture { position in
