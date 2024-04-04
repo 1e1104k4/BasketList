@@ -23,4 +23,8 @@ struct Location: Codable, Equatable, Identifiable {
     static let example = Location(id: UUID(), name: "Maui", description: "I was here", latitude: 20.85593, longitude: -156.60155)
     #endif
     
+    static func ==(lhs: Location, rhs: Location) -> Bool {
+        lhs.id == rhs.id
+    }
+    
 }
