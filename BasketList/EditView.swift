@@ -27,6 +27,7 @@ struct EditView: View {
             .toolbar {
                 Button("Save") {
                     var newLocation = location
+                    newLocation.id = UUID()
                     newLocation.name = name // name to be the new @state local name
                     newLocation.description = description
                     
