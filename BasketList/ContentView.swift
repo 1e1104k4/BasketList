@@ -42,7 +42,11 @@ struct ContentView: View {
                 }
             }
             .sheet(item: $selectedPlace) { place in // aut0 unwrap opt when value set
-                Text(place.name)
+                EditView(location: place) { newLocation in           // closure - when save button
+                    if let index = locations.firstIndex(of: place) { // find prev unedited place in arr
+                        locations[index] = newLocation               // replace it with newLoc
+                    }
+                }
             }
         }
     }
