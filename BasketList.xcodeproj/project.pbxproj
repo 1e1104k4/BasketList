@@ -12,6 +12,7 @@
 		2E1978652BBDF57C004EE0DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E1978642BBDF57C004EE0DC /* Assets.xcassets */; };
 		2E1978682BBDF57C004EE0DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E1978672BBDF57C004EE0DC /* Preview Assets.xcassets */; };
 		2E19786F2BBE0D68004EE0DC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E19786E2BBE0D68004EE0DC /* Location.swift */; };
+		2E1978732BBF478E004EE0DC /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1978722BBF478E004EE0DC /* EditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		2E1978642BBDF57C004EE0DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E1978672BBDF57C004EE0DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2E19786E2BBE0D68004EE0DC /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		2E1978722BBF478E004EE0DC /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				2E1978602BBDF57B004EE0DC /* BasketListApp.swift */,
 				2E1978622BBDF57B004EE0DC /* ContentView.swift */,
+				2E1978722BBF478E004EE0DC /* EditView.swift */,
 				2E19786E2BBE0D68004EE0DC /* Location.swift */,
 				2E1978642BBDF57C004EE0DC /* Assets.xcassets */,
 				2E1978662BBDF57C004EE0DC /* Preview Content */,
@@ -142,6 +145,7 @@
 			files = (
 				2E1978632BBDF57B004EE0DC /* ContentView.swift in Sources */,
 				2E19786F2BBE0D68004EE0DC /* Location.swift in Sources */,
+				2E1978732BBF478E004EE0DC /* EditView.swift in Sources */,
 				2E1978612BBDF57B004EE0DC /* BasketListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
