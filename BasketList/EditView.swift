@@ -20,6 +20,7 @@ struct EditView: View {
     var onSave: (Location) -> Void
     
     @State private var loadingState = LoadingState.loading
+    @State private var pages = [Page]()
     
     var body: some View {
         NavigationStack {
