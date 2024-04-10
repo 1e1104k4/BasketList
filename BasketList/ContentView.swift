@@ -36,15 +36,12 @@ struct ContentView: View {
             }
             .onTapGesture { position in
                 if let coordinate = proxy.convert(position, from: .local) {
-                    let newLocation = Location(id: UUID(), name: "New Location", description: "", latitude: coordinate.latitude, longitude: coordinate.longitude)
-                    viewModel.locations.append(newLocation)
+                    viewModel.addLocation(at: coordinate)
                 }
             }
             .sheet(item: $viewModel.selectedPlace) { place in // aut0 unwrap opt when value set
-                EditView(location: place) { newLocation in           // closure - when save button
-                    if let index = viewModel.locations.firstIndex(of: place) { // find prev unedited place in arr
-                        viewModel.locations[index] = newLocation               // replace it with newLoc
-                    }
+                EditView(location: place) {           // closure - when save button
+                    viewModel.update(location: $0)
                 }
             }
         }
