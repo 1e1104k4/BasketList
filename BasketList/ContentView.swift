@@ -17,34 +17,46 @@ struct ContentView: View {
     )
     
     @State private var viewModel = ViewModel()
+    @AppStorage("mapStyle") private var mapStyle = "standard"
     
     var body: some View {
         if viewModel.isUnlocked {
-            MapReader { proxy in
-                Map(initialPosition: startPosition) {
-                    ForEach(viewModel.locations) { location in
-                        Annotation(location.name, coordinate: location.coordinate) {
-                            Image(systemName: "star.square")
-                                .resizable()
-                                .foregroundStyle(.yellow)
-                                .frame(width: 40, height: 40)
-                                .clipShape(.circle)
-                                .onLongPressGesture {
-                                    viewModel.selectedPlace = location
-                                }
+            VStack {
+                MapReader { proxy in
+                    Map(initialPosition: startPosition) {
+                        ForEach(viewModel.locations) { location in
+                            Annotation(location.name, coordinate: location.coordinate) {
+                                Image(systemName: "star.square")
+                                    .resizable()
+                                    .foregroundStyle(.yellow)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(.circle)
+                                    .onLongPressGesture {
+                                        viewModel.selectedPlace = location
+                                    }
+                            }
+                        }
+                    }
+                    .mapStyle(mapStyle == "standard" ? .standard : .hybrid)
+                    .onTapGesture { position in
+                        if let coordinate = proxy.convert(position, from: .local) {
+                            viewModel.addLocation(at: coordinate)
+                        }
+                    }
+                    .sheet(item: $viewModel.selectedPlace) { place in // aut0 unwrap opt when value set
+                        EditView(location: place) {           // closure - when save button
+                            viewModel.update(location: $0)
                         }
                     }
                 }
-                .onTapGesture { position in
-                    if let coordinate = proxy.convert(position, from: .local) {
-                        viewModel.addLocation(at: coordinate)
-                    }
+                Picker("Map Style", selection: $mapStyle) {
+                    Text("Standard")
+                        .tag("standard")
+                    Text("Hybrid")
+                        .tag("hybrid")
                 }
-                .sheet(item: $viewModel.selectedPlace) { place in // aut0 unwrap opt when value set
-                    EditView(location: place) {           // closure - when save button
-                        viewModel.update(location: $0)
-                    }
-                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
             }
         } else {
             Button("Unlock Places", action: viewModel.authenticate)
