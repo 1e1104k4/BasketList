@@ -10,6 +10,7 @@ import SwiftUI
 struct EditView: View {
     @Environment(\.dismiss) var dismiss
     
+    @State private var viewModel: ViewModel
     var onSave: (Location) -> Void
     
     var body: some View {
