@@ -17,16 +17,16 @@ struct EditView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Place name", text: $name)
-                    TextField("Description", text: $description)
+                    TextField("Place name", text: $viewModel.name)
+                    TextField("Description", text: $viewModel.description)
                 }
                 
                 Section("Nearby...") {
-                    switch loadingState {
+                    switch viewModel.loadingState {
                     case .loading:
                         Text("Loading...")
                     case .loaded:
-                        ForEach(pages, id: \.pageid) { page in
+                        ForEach(viewModel.pages, id: \.pageid) { page in
                             Text(page.title)
                                 .font(.headline)
                             + Text(": ") +
@@ -42,27 +42,24 @@ struct EditView: View {
             .navigationTitle("Place details")
             .toolbar {
                 Button("Save") {
-                    var newLocation = location
+                    var newLocation = viewModel.location
                     newLocation.id = UUID()
-                    newLocation.name = name // name to be the new @state local name
-                    newLocation.description = description
+                    newLocation.name = viewModel.name // name to be the new @state local name
+                    newLocation.description = viewModel.description
                     
                     onSave(newLocation)
                     dismiss()
                 }
             }
             .task {
-                await fetchNearbyPlaces()
+                await viewModel.fetchNearbyPlaces()
             }
         }
     }
     
     init(location: Location, onSave: @escaping (Location) -> Void) {
-        self.location = location
         self.onSave = onSave
-        
-        _name = State(initialValue: location.name)
-        _description = State(initialValue: location.description)
+        _viewModel = State(initialValue: ViewModel(location: location))
     }
 }
 
