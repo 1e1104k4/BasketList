@@ -42,11 +42,7 @@ struct EditView: View {
             .navigationTitle("Place details")
             .toolbar {
                 Button("Save") {
-                    var newLocation = viewModel.location
-                    newLocation.id = UUID()
-                    newLocation.name = viewModel.name // name to be the new @state local name
-                    newLocation.description = viewModel.description
-                    
+                    let newLocation = viewModel.createNewLocation()
                     onSave(newLocation)
                     dismiss()
                 }
